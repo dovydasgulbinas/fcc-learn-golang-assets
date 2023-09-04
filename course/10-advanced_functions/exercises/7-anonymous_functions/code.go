@@ -4,6 +4,11 @@ import "fmt"
 
 func printReports(messages []string) {
 	// ?
+	for _, m := range messages {
+		printCostReport(func(msg string) int {
+			return len(msg) * 2
+		}, m)
+	}
 }
 
 // don't touch below this line
