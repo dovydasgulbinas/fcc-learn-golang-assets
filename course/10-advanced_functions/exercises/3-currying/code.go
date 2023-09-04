@@ -10,6 +10,9 @@ import (
 // the result instead of returning it
 func getLogger(formatter func(string, string) string) func(string, string) {
 	// ?
+	return func(first, second string) {
+		fmt.Println(formatter(first, second))
+	}
 }
 
 // don't touch below this line
@@ -26,6 +29,7 @@ func test(first string, errors []error, formatter func(string, string) string) {
 func colonDelimit(first, second string) string {
 	return first + ": " + second
 }
+
 func commaDelimit(first, second string) string {
 	return first + ", " + second
 }

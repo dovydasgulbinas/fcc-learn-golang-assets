@@ -8,6 +8,17 @@ import (
 
 func getCounts(userIDs []string) map[string]int {
 	// ?
+	messageCounter := make(map[string]int)
+
+	for i := range userIDs {
+		userID := userIDs[i]
+		if _, ok := messageCounter[userID]; !ok {
+			messageCounter[userID] = 0
+		}
+		messageCounter[userID]++
+	}
+
+	return messageCounter
 }
 
 // don't edit below this line
