@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func (e email) setMessage(newMessage string) {
+func (e *email) setMessage(newMessage string) {
 	e.message = newMessage
 }
 
@@ -45,5 +45,4 @@ func main() {
 		fromAddress: "sandra@mailio-test.com",
 		toAddress:   "bullock@mailio-test.com",
 	}, "this is my fourth draft")
-
 }
