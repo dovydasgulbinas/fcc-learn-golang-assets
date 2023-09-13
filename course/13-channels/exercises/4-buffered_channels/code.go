@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func addEmailsToQueue(emails []string) chan string {
-	emailsToSend := make(chan string)
+	emailsToSend := make(chan string, len(emails))
 	for _, email := range emails {
 		emailsToSend <- email
 	}
@@ -29,6 +29,10 @@ func test(emails ...string) {
 
 func main() {
 	test("Hello John, tell Kathy I said hi", "Whazzup bruther")
-	test("I find that hard to believe.", "When? I don't know if I can", "What time are you thinking?")
+	test(
+		"I find that hard to believe.",
+		"When? I don't know if I can",
+		"What time are you thinking?",
+	)
 	test("She says hi!", "Yeah its tomorrow. So we're good.", "Cool see you then!", "Bye!")
 }

@@ -6,7 +6,15 @@ import (
 )
 
 func countReports(numSentCh chan int) int {
-	// ?
+	totalSent := 0
+	for {
+		v, ok := <-numSentCh
+		if !ok {
+			break
+		}
+		totalSent += v
+	}
+	return totalSent
 }
 
 // TEST SUITE - Don't touch below this line
