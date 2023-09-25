@@ -1,6 +1,6 @@
 package main
 
-import (
+mport (
 	"fmt"
 	"sort"
 	"sync"
@@ -13,14 +13,14 @@ type safeCounter struct {
 }
 
 func (sc safeCounter) inc(key string) {
-	sc.mux.Lock()
-	defer sc.mux.Unlock()
+	sc.mux.RLock()
+	defer sc.mux.RUnlock()
 	sc.slowIncrement(key)
 }
 
 func (sc safeCounter) val(key string) int {
-	sc.mux.Lock()
-	defer sc.mux.Unlock()
+	sc.mux.RLock()
+	defer sc.mux.RUnlock()
 	return sc.counts[key]
 }
 

@@ -2,8 +2,13 @@ package main
 
 import "fmt"
 
-func getLast[]() {
+func getLast[T any](s []T) T {
+	if len(s) == 0 {
+		var empty T // we create an empty container from particular type passed in
+		return empty
+	}
 
+	return s[len(s)-1]
 }
 
 // don't edit below this line
