@@ -6,7 +6,11 @@ import (
 )
 
 func chargeForLineItem[T lineItem](newItem T, oldItems []T, balance float64) ([]T, float64, error) {
-	// ?
+	if newItem.GetCost() > balance {
+		return oldItems, balance, fmt.Errorf("insufficient funds")
+	}
+
+	return append(oldItems, newItem), balance - newItem.GetCost(), nil
 }
 
 // don't edit below this line
@@ -101,11 +105,19 @@ func main() {
 
 func test[T lineItem](newItem T, oldItems []T, balance float64) {
 	fmt.Println(" --- ")
-	fmt.Printf("Charging customer for a '%s', current balance is %v...\n", newItem.GetName(), balance)
+	fmt.Printf(
+		"Charging customer for a '%s', current balance is %v...\n",
+		newItem.GetName(),
+		balance,
+	)
 	newItems, newBalance, err := chargeForLineItem(newItem, oldItems, balance)
 	if err != nil {
 		fmt.Printf("Got error: %v\n", err)
 		return
 	}
-	fmt.Printf("New balance is: %v. Total number of line items is now %v\n", newBalance, len(newItems))
+	fmt.Printf(
+		"New balance is: %v. Total number of line items is now %v\n",
+		newBalance,
+		len(newItems),
+	)
 }
